@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
 import lombok.Data;
@@ -30,9 +32,11 @@ public class Hashtag {
     private String label;
 
     @Column(nullable = false)
+    @CreationTimestamp
     private Timestamp firstUsed;
 
     @Column(nullable = false)
+    @UpdateTimestamp
     private Timestamp lastUsed;
 
     @ManyToMany(mappedBy = "hashtags")

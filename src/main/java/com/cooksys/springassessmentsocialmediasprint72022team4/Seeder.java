@@ -3,6 +3,7 @@ package com.cooksys.springassessmentsocialmediasprint72022team4;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
@@ -18,12 +19,13 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class Seeder {
+public class Seeder implements CommandLineRunner {
 
-    private HashtagRepository hashtagRepository;
-    private TweetRepository tweetRepository;
-    private UserRepository userRepository;
+    private final HashtagRepository hashtagRepository;
+    private final TweetRepository tweetRepository;
+    private final UserRepository userRepository;
     
+	@Override
     public void run(String... args) throws Exception {
         		// --- User 1 ---
 		// Credentials
@@ -258,10 +260,12 @@ public class Seeder {
 		tweetRepository.saveAndFlush(mention1);
 
 		// Following
-		List<User> following_1 = List.of(user2, user3, user4, deletedUser);
+		// TODO: Deleted deletedUser in followers list. Ask if okay.
+		List<User> following_1 = List.of(user2, user3, user4);
 		user1.setFollowing(following_1);
 
-		List<User> followers_1 = List.of(user5, deletedUser);
+		// TODO: Deleted deletedUser in followers list. Ask if okay.
+		List<User> followers_1 = List.of(user5);
 		user1.setFollowers(followers_1);
 		userRepository.saveAndFlush(user1);
     }
