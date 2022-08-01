@@ -2,7 +2,6 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.entities;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
 
@@ -20,6 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "tweets")
 @Where(clause = "deleted = false")
 @NoArgsConstructor
 @Data
@@ -32,7 +33,6 @@ public class Tweet {
     private boolean deleted;
 
     @ManyToOne
-    @JoinColumn
     private User author;
 
     @Column(nullable = false)
@@ -58,6 +58,6 @@ public class Tweet {
         joinColumns = @JoinColumn(name = "tweet_id"),
         inverseJoinColumns = @JoinColumn(name = "hashtag_id")
     )
-    private Set<Hashtag> hashtags;
+    private List<Hashtag> hashtags;
 
 }
