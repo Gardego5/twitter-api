@@ -13,7 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Where;
 
 import lombok.Data;
@@ -41,6 +44,8 @@ public class User {
     private Profile profile;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Timestamp joined;
 
     @OneToMany(mappedBy = "author")

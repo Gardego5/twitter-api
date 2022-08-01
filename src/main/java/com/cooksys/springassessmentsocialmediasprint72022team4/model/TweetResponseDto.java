@@ -1,7 +1,5 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.model;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +13,7 @@ public class TweetResponseDto {
 
     private UserResponseDto author;
 
-    private Timestamp posted;
+    private Long posted;
 
     private String content;
 

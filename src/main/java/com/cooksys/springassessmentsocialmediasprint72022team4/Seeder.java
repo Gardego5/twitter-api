@@ -3,6 +3,7 @@ package com.cooksys.springassessmentsocialmediasprint72022team4;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
@@ -18,12 +19,13 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class Seeder {
+public class Seeder implements CommandLineRunner {
 
-    private HashtagRepository hashtagRepository;
-    private TweetRepository tweetRepository;
-    private UserRepository userRepository;
+    private final HashtagRepository hashtagRepository;
+    private final TweetRepository tweetRepository;
+    private final UserRepository userRepository;
     
+	@Override
     public void run(String... args) throws Exception {
         		// --- User 1 ---
 		// Credentials
