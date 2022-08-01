@@ -2,14 +2,17 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.entities;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Where;
 
@@ -40,10 +43,13 @@ public class Tweet {
     @ManyToOne
     private Tweet inReplyTo;
 
+    @OneToMany(mappedBy = "inReplyTo")
+    private List<Tweet> replies;
+
     @ManyToOne
     private Tweet repostOf;
 
-    @ManyToMany(mappedBy = "tweets")
-    private List<Hashtag> hashtags;
+    @OneToMany(mappedBy = "repostOf")
+    private List<Tweet> reposts;
 
 }

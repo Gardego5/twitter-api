@@ -1,14 +1,13 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.entities;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Where;
 
@@ -23,7 +22,6 @@ public class Hashtag {
 
     @Id
     @GeneratedValue
-    @OneToOne()
     private int id;
 
     private boolean deleted;
@@ -36,8 +34,5 @@ public class Hashtag {
 
     @Column(nullable = false)
     private Timestamp lastUsed;
-
-    @ManyToMany(mappedBy = "hashtags")
-    private List<Tweet> tweets;
 
 }
