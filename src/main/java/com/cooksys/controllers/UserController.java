@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/tweets")
-public class TweetController {
+@RequestMapping("/users")
+public class UserController {
 
 }
