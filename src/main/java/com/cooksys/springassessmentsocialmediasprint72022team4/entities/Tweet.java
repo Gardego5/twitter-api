@@ -12,7 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
 
@@ -20,7 +19,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tweets")
 @Where(clause = "deleted = false")
 @NoArgsConstructor
 @Data
@@ -59,5 +57,16 @@ public class Tweet {
         inverseJoinColumns = @JoinColumn(name = "hashtag_id")
     )
     private List<Hashtag> hashtags;
+
+    @ManyToMany(mappedBy = "likedTweets")
+    private List<User> likers;
+
+    @ManyToMany
+    @JoinTable(
+        name = "user_mentions",
+        joinColumns = @JoinColumn(name = "tweet_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> mentioners;
 
 }

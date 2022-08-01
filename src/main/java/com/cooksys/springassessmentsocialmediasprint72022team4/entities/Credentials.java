@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Credentials {
 
     @Column(nullable = false)
-    private String userName;
+    private String username;
 
     @Column(nullable = false)
     private String password;
