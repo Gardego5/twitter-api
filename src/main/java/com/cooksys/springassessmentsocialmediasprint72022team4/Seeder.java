@@ -260,13 +260,13 @@ public class Seeder implements CommandLineRunner {
 		tweetRepository.saveAndFlush(mention1);
 
 		// Following
-		List<User> following_1 = List.of(user2, user3, user4, deletedUser);
+		// TODO: Deleted deletedUser in followers list. Ask if okay.
+		List<User> following_1 = List.of(user2, user3, user4);
 		user1.setFollowing(following_1);
 
-		/*
-		List<User> followers_1 = List.of(user5, deletedUser);
+		// TODO: Deleted deletedUser in followers list. Ask if okay.
+		List<User> followers_1 = List.of(user5);
 		user1.setFollowers(followers_1);
 		userRepository.saveAndFlush(user1);
-		*/
     }
 }
