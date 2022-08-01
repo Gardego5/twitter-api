@@ -8,13 +8,11 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Where;
@@ -44,7 +42,6 @@ public class User {
     private Profile profile;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Timestamp joined;
 

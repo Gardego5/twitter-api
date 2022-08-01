@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -34,12 +32,10 @@ public class Hashtag {
     private String label;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Timestamp firstUsed;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Timestamp lastUsed;
 
