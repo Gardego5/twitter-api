@@ -52,4 +52,12 @@ public class Tweet {
     @OneToMany(mappedBy = "repostOf")
     private List<Tweet> reposts;
 
+    @ManyToMany
+    @JoinTable(
+        name = "tweet_hashtags",
+        joinColumns = @JoinColumn(name = "tweet_id"),
+        inverseJoinColumns = @JoinColumn(name = "hashtag_id")
+    )
+    private Set<Hashtag> hashtags;
+
 }

@@ -35,4 +35,7 @@ public class Hashtag {
     @Column(nullable = false)
     private Timestamp lastUsed;
 
+    @ManyToMany(mappedBy = "hashtags")
+    private Set<Tweet> tweets;
+
 }
