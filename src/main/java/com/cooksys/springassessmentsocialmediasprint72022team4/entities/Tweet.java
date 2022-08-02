@@ -61,11 +61,7 @@ public class Tweet {
     private List<User> likers = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-        name = "user_mentions",
-        joinColumns = @JoinColumn(name = "tweet_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @JoinTable(name = "user_mentions", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> mentions;
 
 }

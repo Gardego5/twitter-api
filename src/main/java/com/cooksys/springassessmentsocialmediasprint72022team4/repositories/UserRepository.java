@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByCredentials_Username(String username);
 
-    default public User getOptionalByUsername(String username) {
+    default public User tryToFindByUsername(String username) throws NotFoundException {
         Optional<User> optionalTweet = findByCredentials_Username(username);
 
         if (optionalTweet.isEmpty())

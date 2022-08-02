@@ -22,7 +22,7 @@ public class CredentialsServiceImpl implements CredentialsService {
     private final UserRepository userRepository;
 
     private User checkAuthorization(Credentials credentials) {
-        User user = userRepository.getOptionalByUsername(credentials.getUsername());
+        User user = userRepository.tryToFindByUsername(credentials.getUsername());
         if (user.getCredentials().equals(credentials))
             return user;
         else
