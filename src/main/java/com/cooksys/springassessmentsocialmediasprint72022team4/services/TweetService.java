@@ -6,4 +6,6 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetRespon
 public interface TweetService {
 
     TweetResponseDto postReply(Integer id, TweetRequestDto tweetRequestDto);
+
+    TweetResponseDto getTweetById(Integer id);
 }

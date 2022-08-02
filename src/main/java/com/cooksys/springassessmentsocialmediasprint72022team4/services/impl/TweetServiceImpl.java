@@ -32,4 +32,10 @@ public class TweetServiceImpl implements TweetService {
         return tweetMapper.entityToResponseDto(
             tweetRepository.saveAndFlush(tweetToPost));
     }
+
+    @Override
+    public TweetResponseDto getTweetById(Integer id) {
+        return tweetMapper.entityToResponseDto(
+            tweetRepository.getOptionalById(id));
+    }
 }
