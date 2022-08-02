@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface HashtagMapper {
 
-    Hashtag dtoToEntity(HashtagDto hashtagDto);
+//    Hashtag dtoToEntity(HashtagDto hashtagDto);
 
-    HashtagDto entityToDto(Hashtag hashtag);
+//    HashtagDto entityToDto(Hashtag hashtag);
 
-    List<HashtagDto> entitiesToDtos( List<Hashtag> hashtags);
+//    List<HashtagDto> entitiesToDtos( List<Hashtag> hashtags);
 
 }
