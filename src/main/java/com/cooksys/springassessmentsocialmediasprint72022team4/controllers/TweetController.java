@@ -3,6 +3,7 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.controllers;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetRequestDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.services.TweetService;
@@ -31,5 +33,10 @@ public class TweetController {
     @GetMapping("/{id}")
     public TweetResponseDto getTweetById(@PathVariable Integer id) {
         return tweetService.getTweetById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public TweetResponseDto deleteTweetById(@PathVariable Integer id, @RequestBody CredentialsDto credentialsDto) {
+        return tweetService.deleteTweetById(id, credentialsDto);
     }
 }

@@ -3,6 +3,7 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.services.impl;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Tweet;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
 import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.TweetMapper;
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetRequestDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.repositories.TweetRepository;
@@ -37,5 +38,16 @@ public class TweetServiceImpl implements TweetService {
     public TweetResponseDto getTweetById(Integer id) {
         return tweetMapper.entityToResponseDto(
             tweetRepository.getOptionalById(id));
+    }
+
+    @Override
+    public TweetResponseDto deleteTweetById(Integer id, CredentialsDto credentialsDto) {
+        Tweet tweetToDelete = tweetRepository.getOptionalById(id);
+        credentialsService.checkAuthorization(credentialsDto, tweetToDelete);
+
+        tweetToDelete.setDeleted(true);
+
+        return tweetMapper.entityToResponseDto(
+            tweetRepository.saveAndFlush(tweetToDelete));
     }
 }

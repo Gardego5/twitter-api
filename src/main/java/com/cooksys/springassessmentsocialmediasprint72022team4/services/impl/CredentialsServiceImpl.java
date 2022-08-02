@@ -3,6 +3,7 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.services.impl;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
+import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Tweet;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotAuthorizedException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.CredentialsMapper;
@@ -35,5 +36,15 @@ public class CredentialsServiceImpl implements CredentialsService {
     @Override
     public User checkAuthorization(TweetRequestDto tweetRequestDto) {
         return checkAuthorization(tweetRequestDto.getCredentials());
+    }
+
+    @Override
+    public User checkAuthorization(CredentialsDto credentialsDto, Tweet tweetToDelete) {
+        User user = checkAuthorization(credentialsDto);
+
+        if (user == tweetToDelete.getAuthor())
+            return user;
+        else
+            throw new NotAuthorizedException("Wrong User");
     }
 }
