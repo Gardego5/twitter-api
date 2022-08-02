@@ -1,10 +1,11 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.mappers;
 
-import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
-import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
+import java.util.List;
+
 import org.mapstruct.Mapper;
 
-import java.util.List;
+import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 
 @Mapper(componentModel = "spring")
 public interface CredentialsMapper {

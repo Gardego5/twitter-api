@@ -1,17 +1,19 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.mappers;
 
-import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Profile;
-import com.cooksys.springassessmentsocialmediasprint72022team4.model.ProfileDto;
+import java.util.List;
+
 import org.mapstruct.Mapper;
 
-import java.util.List;
+import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Profile;
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.ProfileDto;
 
 @Mapper(componentModel = "spring")
 public interface ProfileMapper {
 
-        Profile dtoToEntity(ProfileDto profileDto);
+    Profile dtoToEntity(ProfileDto profileDto);
 
-        ProfileDto entityToDto(Profile profile);
+    ProfileDto entityToDto(Profile profile);
 
-        List<ProfileDto> entitiesToDtos(List<Profile> profiles);
+    List<ProfileDto> entitiesToDtos(List<Profile> profiles);
+
 }
