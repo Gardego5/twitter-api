@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/hashtags")
+@RequestMapping("/tags")
 public class HashtagController {
 }
