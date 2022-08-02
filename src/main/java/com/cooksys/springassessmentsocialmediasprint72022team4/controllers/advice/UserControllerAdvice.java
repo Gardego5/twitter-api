@@ -10,26 +10,24 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpServletRequest;
-
-@ControllerAdvice (basePackages = { "com.cooksys.springassessmentsocialmediasprint72022team4" })
+@ControllerAdvice(basePackages = { "com.cooksys.springassessmentsocialmediasprint72022team4" })
 @ResponseBody
 public class UserControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
-    public ErrorDto handleBadRequestException(HttpServletRequest request, BadRequestException badRequestException) {
+    public ErrorDto handleBadRequestException(BadRequestException badRequestException) {
         return new ErrorDto(badRequestException.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public ErrorDto handleNotFoundException(HttpServletRequest request, NotFoundException notFoundException) {
+    public ErrorDto handleNotFoundException(NotFoundException notFoundException) {
         return new ErrorDto(notFoundException.getMessage());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(NotAuthorizedException.class)
-    public ErrorDto handleNotAuthorizedException(HttpServletRequest request, NotAuthorizedException notFoundException) {
-        return new ErrorDto(notFoundException.getMessage());
+    public ErrorDto handleNotAuthorized(NotAuthorizedException notAuthorizedException) {
+        return new ErrorDto(notAuthorizedException.getMessage());
     }
 }
