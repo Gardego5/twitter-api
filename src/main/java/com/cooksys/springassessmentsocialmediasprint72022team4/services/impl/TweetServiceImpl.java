@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Hashtag;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Tweet;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
+import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.BadRequestException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFoundException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.TweetMapper;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
@@ -79,6 +80,9 @@ public class TweetServiceImpl implements TweetService {
     private Tweet setupTweet(TweetRequestDto tweetRequestDto) {
         User author = credentialsService.checkAuthorization(tweetRequestDto);
         Tweet tweet = tweetMapper.requestDtoToEntity(tweetRequestDto);
+
+        if (tweet.getContent() == null || tweet.getContent() == "")
+            throw new BadRequestException("Tweet has no content");
 
         tweet.setAuthor(author);
         tweet.setMentions(findMentions(tweetRequestDto.getContent()));
