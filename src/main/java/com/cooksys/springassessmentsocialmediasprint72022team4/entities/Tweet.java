@@ -1,6 +1,7 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.entities;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -44,31 +45,23 @@ public class Tweet {
     private Tweet inReplyTo;
 
     @OneToMany(mappedBy = "inReplyTo")
-    private List<Tweet> replies;
+    private List<Tweet> replies = new ArrayList<>();
 
     @ManyToOne
     private Tweet repostOf;
 
     @OneToMany(mappedBy = "repostOf")
-    private List<Tweet> reposts;
+    private List<Tweet> reposts = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-        name = "tweet_hashtags",
-        joinColumns = @JoinColumn(name = "tweet_id"),
-        inverseJoinColumns = @JoinColumn(name = "hashtag_id")
-    )
-    private List<Hashtag> hashtags;
+    @JoinTable(name = "tweet_hashtags", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "hashtag_id"))
+    private List<Hashtag> hashtags = new ArrayList<>();
 
     @ManyToMany(mappedBy = "likedTweets")
-    private List<User> likers;
+    private List<User> likers = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-        name = "user_mentions",
-        joinColumns = @JoinColumn(name = "tweet_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> mentioners;
+    @JoinTable(name = "user_mentions", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> mentioners = new ArrayList<>();
 
 }

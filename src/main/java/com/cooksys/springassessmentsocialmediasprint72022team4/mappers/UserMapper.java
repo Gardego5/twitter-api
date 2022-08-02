@@ -10,20 +10,13 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserRequestDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserResponseDto;
 
-@Mapper(componentModel = "spring", uses = {CredentialsMapper.class, ProfileMapper.class})
+@Mapper(componentModel = "spring", uses = { CredentialsMapper.class, ProfileMapper.class })
 public interface UserMapper {
 
-    User requestDtoToEntity (UserRequestDto userRequestDto);
+    User requestDtoToEntity(UserRequestDto userRequestDto);
 
-    UserResponseDto entityToResponseDto (User user);
+    UserResponseDto entityToResponseDto(User user);
 
     List<UserResponseDto> entitiesToResponseDtos(List<User> users);
 
-    default Long map(Timestamp timestamp) {
-        return timestamp == null ? null : timestamp.getTime();
-    } 
-
-    default Timestamp map(Long time) {
-        return time == null ? null : Timestamp.from(Instant.ofEpochSecond(time));
-    }
 }

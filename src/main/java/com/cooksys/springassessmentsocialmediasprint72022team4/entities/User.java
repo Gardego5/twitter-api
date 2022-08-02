@@ -1,6 +1,7 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.entities;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -46,28 +47,20 @@ public class User {
     private Timestamp joined;
 
     @OneToMany(mappedBy = "author")
-    private List<Tweet> tweets;
+    private List<Tweet> tweets = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-        name = "user_likes",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "tweet_id")
-    )
-    private List<Tweet> likedTweets;
+    @JoinTable(name = "user_likes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "tweet_id"))
+    private List<Tweet> likedTweets = new ArrayList<>();
 
     @ManyToMany(mappedBy = "mentioners")
-    private List<Tweet> mentions;
+    private List<Tweet> mentions = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-        name = "followers_following",
-        joinColumns = @JoinColumn(name = "follower_id"),
-        inverseJoinColumns = @JoinColumn(name = "following_id")
-    )
-    private List<User> followers;
-    
+    @JoinTable(name = "followers_following", joinColumns = @JoinColumn(name = "follower_id"), inverseJoinColumns = @JoinColumn(name = "following_id"))
+    private List<User> followers = new ArrayList<>();
+
     @ManyToMany(mappedBy = "followers")
-    private List<User> following;
+    private List<User> following = new ArrayList<>();
 
 }
