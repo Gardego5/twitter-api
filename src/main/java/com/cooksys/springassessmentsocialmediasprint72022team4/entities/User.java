@@ -56,8 +56,8 @@ public class User {
     )
     private List<Tweet> likedTweets;
 
-    @ManyToMany(mappedBy = "mentioners")
-    private List<Tweet> mentions;
+    @ManyToMany(mappedBy = "mentions")
+    private List<Tweet> mentionedIn;
 
     @ManyToMany
     @JoinTable(
