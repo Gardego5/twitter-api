@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserRequestDto;
@@ -15,8 +16,10 @@ public interface UserMapper {
 
     User requestDtoToEntity (UserRequestDto userRequestDto);
 
+    @Mapping(target = "username", source = "credentials.username")
     UserResponseDto entityToResponseDto (User user);
 
+    @Mapping(target = "username", source = "credentials.username")
     List<UserResponseDto> entitiesToResponseDtos(List<User> users);
 
     default Long map(Timestamp timestamp) {

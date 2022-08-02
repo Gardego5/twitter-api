@@ -1,6 +1,7 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.controllers.advice;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.BadRequestException;
+import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotAuthorizedException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFoundException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.ErrorDto;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,12 @@ public class UserControllerAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ErrorDto handleNotFoundException(HttpServletRequest request, NotFoundException notFoundException) {
+        return new ErrorDto(notFoundException.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(NotAuthorizedException.class)
+    public ErrorDto handleNotAuthorizedException(HttpServletRequest request, NotAuthorizedException notFoundException) {
         return new ErrorDto(notFoundException.getMessage());
     }
 }
