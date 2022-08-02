@@ -1,7 +1,5 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.controllers;
 
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +15,20 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetReques
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.services.TweetService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/tweets")
 public class TweetController {
 
     private final TweetService tweetService;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TweetResponseDto post(@RequestBody TweetRequestDto tweetRequestDto) {
+        return tweetService.post(tweetRequestDto);
+    }
 
     @PostMapping("/{id}/reply")
     @ResponseStatus(HttpStatus.CREATED)

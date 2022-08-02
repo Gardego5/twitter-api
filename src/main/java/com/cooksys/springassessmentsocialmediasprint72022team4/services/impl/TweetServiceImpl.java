@@ -76,17 +76,31 @@ public class TweetServiceImpl implements TweetService {
         return hashtags;
     }
 
+    private Tweet setupTweet(TweetRequestDto tweetRequestDto) {
+        User author = credentialsService.checkAuthorization(tweetRequestDto);
+        Tweet tweet = tweetMapper.requestDtoToEntity(tweetRequestDto);
+
+        tweet.setAuthor(author);
+        tweet.setMentions(findMentions(tweetRequestDto.getContent()));
+        tweet.setHashtags(findHashtags(tweetRequestDto.getContent()));
+
+        return tweet;
+    }
+
+    @Override
+    public TweetResponseDto post(TweetRequestDto tweetRequestDto) {
+        Tweet tweetToPost = setupTweet(tweetRequestDto);
+
+        return tweetMapper.entityToResponseDto(
+            tweetRepository.saveAndFlush(tweetToPost));
+    }
+
     @Override
     public TweetResponseDto postReply(Integer id, TweetRequestDto tweetRequestDto) {
-        User author = credentialsService.checkAuthorization(tweetRequestDto);
+        Tweet tweetToPost = setupTweet(tweetRequestDto);
         Tweet tweetToReplyTo = tweetRepository.tryToFindById(id);
 
-        Tweet tweetToPost = tweetMapper.requestDtoToEntity(tweetRequestDto);
-
-        tweetToPost.setAuthor(author);
         tweetToPost.setInReplyTo(tweetToReplyTo);
-        tweetToPost.setMentions(findMentions(tweetRequestDto.getContent()));
-        tweetToPost.setHashtags(findHashtags(tweetRequestDto.getContent()));
 
         return tweetMapper.entityToResponseDto(
             tweetRepository.saveAndFlush(tweetToPost));
