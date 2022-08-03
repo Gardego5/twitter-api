@@ -14,6 +14,8 @@ public interface TweetRepository extends JpaRepository<Tweet, Integer> {
 
     List<Tweet> findAllByDeletedFalseAndRepostOf(Tweet tweet);
 
+    List<Tweet> findAllByDeletedFalseAndInReplyTo(Tweet tweet);
+
     Optional<Tweet> findByIdAndDeletedFalse(Integer id);
 
     default Tweet tryToFindById(Integer id) throws NotFoundException {

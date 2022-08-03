@@ -24,4 +24,6 @@ public interface TweetService {
     List<TweetResponseDto> getTweetRetweets(Integer id);
 
     TweetResponseDto deleteTweetById(Integer id, CredentialsDto credentialsDto);
+
+    List<TweetResponseDto> getTweetReplies(Integer id);
 }
