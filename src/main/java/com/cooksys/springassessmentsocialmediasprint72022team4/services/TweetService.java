@@ -21,5 +21,7 @@ public interface TweetService {
 
     List<UserResponseDto> getTweetMentions(Integer id);
 
+    List<TweetResponseDto> getTweetRetweets(Integer id);
+
     TweetResponseDto deleteTweetById(Integer id, CredentialsDto credentialsDto);
 }
