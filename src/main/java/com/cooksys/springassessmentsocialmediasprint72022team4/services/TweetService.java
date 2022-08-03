@@ -13,11 +13,13 @@ public interface TweetService {
 
     TweetResponseDto postReply(Integer id, TweetRequestDto tweetRequestDto);
 
-    TweetResponseDto getTweetById(Integer id);
-
-    TweetResponseDto deleteTweetById(Integer id, CredentialsDto credentialsDto);
-
     void likeTweet(Integer id, CredentialsDto credentialsDto);
 
+    TweetResponseDto repostTweet(Integer id, CredentialsDto credentialsDto);
+
+    TweetResponseDto getTweetById(Integer id);
+
     List<UserResponseDto> getTweetMentions(Integer id);
+
+    TweetResponseDto deleteTweetById(Integer id, CredentialsDto credentialsDto);
 }

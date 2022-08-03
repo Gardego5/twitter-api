@@ -29,7 +29,7 @@ public class Tweet {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private boolean deleted;
 
@@ -40,6 +40,7 @@ public class Tweet {
     @CreationTimestamp
     private Timestamp posted;
 
+    @Column(nullable = false)
     private String content;
 
     @ManyToOne

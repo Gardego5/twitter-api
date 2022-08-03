@@ -127,6 +127,30 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    public TweetResponseDto repostTweet(Integer id, CredentialsDto credentialsDto) {
+        Tweet originalTweet = tweetRepository.tryToFindById(id);
+        User author = credentialsService.checkAuthorization(credentialsDto);
+
+        Tweet tweetToRepost = new Tweet();
+        tweetToRepost.setAuthor(author);
+        tweetToRepost.setRepostOf(originalTweet);
+        tweetToRepost.setContent(originalTweet.getContent());
+
+        /*
+         * Note: Using Set.copyOf() to make a new reference to the set,
+         * so that we dont get an error stating "Found shared references
+         * to a collection"
+         */
+        tweetToRepost.setMentions(
+            Set.copyOf(originalTweet.getMentions()));
+        tweetToRepost.setHashtags(
+            Set.copyOf(originalTweet.getHashtags()));
+
+        return tweetMapper.entityToResponseDto(
+            tweetRepository.saveAndFlush(tweetToRepost));
+    }
+
+    @Override
     public TweetResponseDto getTweetById(Integer id) {
         return tweetMapper.entityToResponseDto(
             tweetRepository.tryToFindById(id));

@@ -24,7 +24,7 @@ public class Hashtag {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private boolean deleted;
 
