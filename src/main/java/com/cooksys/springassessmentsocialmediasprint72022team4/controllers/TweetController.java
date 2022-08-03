@@ -36,6 +36,12 @@ public class TweetController {
         return tweetService.postReply(id, tweetRequestDto);
     }
 
+    @PostMapping("/{id}/like")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void likeTweet(@PathVariable Integer id, @RequestBody CredentialsDto credentialsDto) {
+        tweetService.likeTweet(id, credentialsDto);
+    }
+
     @GetMapping("/{id}")
     public TweetResponseDto getTweetById(@PathVariable Integer id) {
         return tweetService.getTweetById(id);

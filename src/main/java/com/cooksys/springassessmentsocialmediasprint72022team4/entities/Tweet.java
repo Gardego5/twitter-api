@@ -2,7 +2,9 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.entities;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -43,23 +46,28 @@ public class Tweet {
     private Tweet inReplyTo;
 
     @OneToMany(mappedBy = "inReplyTo")
+    @EqualsAndHashCode.Exclude
     private List<Tweet> replies = new ArrayList<>();
 
     @ManyToOne
     private Tweet repostOf;
 
     @OneToMany(mappedBy = "repostOf")
+    @EqualsAndHashCode.Exclude
     private List<Tweet> reposts = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "tweet_hashtags", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "hashtag_id"))
-    private List<Hashtag> hashtags = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    private Set<Hashtag> hashtags = new HashSet<>();
 
     @ManyToMany(mappedBy = "likedTweets")
-    private List<User> likers = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    private Set<User> likers = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "user_mentions", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> mentions;
+    @EqualsAndHashCode.Exclude
+    private Set<User> mentions = new HashSet<>();
 
 }

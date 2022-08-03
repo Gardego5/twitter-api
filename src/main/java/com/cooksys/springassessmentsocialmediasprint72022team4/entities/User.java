@@ -2,7 +2,9 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.entities;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -18,6 +20,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -45,20 +48,25 @@ public class User {
     private Timestamp joined;
 
     @OneToMany(mappedBy = "author")
+    @EqualsAndHashCode.Exclude
     private List<Tweet> tweets = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "user_likes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "tweet_id"))
-    private List<Tweet> likedTweets = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    private Set<Tweet> likedTweets = new HashSet<>();
 
     @ManyToMany(mappedBy = "mentions")
-    private List<Tweet> mentions = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    private Set<Tweet> mentions = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "followers_following", joinColumns = @JoinColumn(name = "follower_id"), inverseJoinColumns = @JoinColumn(name = "following_id"))
-    private List<User> followers = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    private Set<User> followers = new HashSet<>();
 
     @ManyToMany(mappedBy = "followers")
-    private List<User> following = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    private Set<User> following = new HashSet<>();
 
 }

@@ -2,6 +2,7 @@ package com.cooksys.springassessmentsocialmediasprint72022team4;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -166,7 +167,7 @@ public class Seeder implements CommandLineRunner {
 		tweet1.setAuthor(user1);
 		tweet1.setDeleted(false);
 		tweet1.setContent("This is some content 1");
-		tweet1.setHashtags(Arrays.asList(hashtag1, hashtag2));
+		tweet1.setHashtags(Set.copyOf(Arrays.asList(hashtag1, hashtag2)));
 		tweetRepository.saveAndFlush(tweet1);
 
 		// --- Start Tweet 2 ---
@@ -174,7 +175,7 @@ public class Seeder implements CommandLineRunner {
 		tweet2.setAuthor(user1);
 		tweet2.setDeleted(false);
 		tweet2.setContent("This is some content 2");
-		tweet2.setHashtags(Arrays.asList(hashtag1, hashtag2));
+		tweet2.setHashtags(Set.copyOf(Arrays.asList(hashtag1, hashtag2)));
 
 		tweetRepository.saveAndFlush(tweet2);
 
@@ -184,7 +185,7 @@ public class Seeder implements CommandLineRunner {
 		tweet3.setDeleted(false);
 		// Set Content @PARAM String
 		tweet3.setContent("This is some content 3");
-		tweet3.setHashtags(Arrays.asList(hashtag3, hashtag4));
+		tweet3.setHashtags(Set.copyOf(Arrays.asList(hashtag3, hashtag4)));
 		tweetRepository.saveAndFlush(tweet3);
 
 		// --- Start Tweet 4 ---
@@ -233,22 +234,22 @@ public class Seeder implements CommandLineRunner {
 		userRepository.saveAndFlush(user3);
 
 		// ----- List of Liked Tweets -----
-		user1.setLikedTweets(user3Tweets);
+		user1.setLikedTweets(Set.copyOf(user3Tweets));
 		userRepository.saveAndFlush(user1);
 
-		user2.setLikedTweets(user1Tweets);
+		user2.setLikedTweets(Set.copyOf(user1Tweets));
 		userRepository.saveAndFlush(user2);
 
-		user3.setLikedTweets(user2Tweets);
+		user3.setLikedTweets(Set.copyOf(user2Tweets));
 		userRepository.saveAndFlush(user3);
 
 		// ----- List of Following -----
 		List<User> followingList = List.of(user2, user3, user4);
-		user1.setFollowing(followingList);
+		user1.setFollowing(Set.copyOf(followingList));
 		userRepository.saveAndFlush(user1);
 		// ----- List of Followers -----
 		List<User> followersList = List.of(user3, user5);
-		user1.setFollowers(followersList);
+		user1.setFollowers(Set.copyOf(followersList));
 		userRepository.saveAndFlush(user1);
 
 		// ----- Tweet Mentions -----
@@ -262,11 +263,11 @@ public class Seeder implements CommandLineRunner {
 		// Following
 		// TODO: Deleted deletedUser in followers list. Ask if okay.
 		List<User> following_1 = List.of(user2, user3, user4);
-		user1.setFollowing(following_1);
+		user1.setFollowing(Set.copyOf(following_1));
 
 		// TODO: Deleted deletedUser in followers list. Ask if okay.
 		List<User> followers_1 = List.of(user5);
-		user1.setFollowers(followers_1);
+		user1.setFollowers(Set.copyOf(followers_1));
 		userRepository.saveAndFlush(user1);
     }
 }

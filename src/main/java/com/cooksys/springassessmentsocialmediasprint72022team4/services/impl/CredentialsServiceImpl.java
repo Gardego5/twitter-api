@@ -29,7 +29,8 @@ public class CredentialsServiceImpl implements CredentialsService {
             throw new NotAuthorizedException("Invalid Password.");
     }
 
-    private User checkAuthorization(CredentialsDto credentialsDto) {
+    @Override
+    public User checkAuthorization(CredentialsDto credentialsDto) {
         return checkAuthorization(credentialsMapper.dtoToEntity(credentialsDto));
     }
 

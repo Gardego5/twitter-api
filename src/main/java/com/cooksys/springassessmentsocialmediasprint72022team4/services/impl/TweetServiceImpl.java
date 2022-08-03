@@ -1,7 +1,7 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.services.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,8 +34,8 @@ public class TweetServiceImpl implements TweetService {
     private final HashtagRepository hashtagRepository;
     private final CredentialsService credentialsService;
 
-    private List<User> findMentions(String content) {
-        List<User> mentions = new ArrayList<>();
+    private Set<User> findMentions(String content) {
+        Set<User> mentions = new HashSet<>();
         Matcher m = Pattern.compile("@[^\\s]+").matcher(content);
         String username = "";
         
@@ -54,8 +54,8 @@ public class TweetServiceImpl implements TweetService {
         return mentions;
     }
 
-    private List<Hashtag> findHashtags(String content) {
-        List<Hashtag> hashtags = new ArrayList<>();
+    private Set<Hashtag> findHashtags(String content) {
+        Set<Hashtag> hashtags = new HashSet<>();
         Matcher m = Pattern.compile("#[^\\s]+").matcher(content);
         String label = "";
 
@@ -108,6 +108,18 @@ public class TweetServiceImpl implements TweetService {
 
         return tweetMapper.entityToResponseDto(
             tweetRepository.saveAndFlush(tweetToPost));
+    }
+
+    @Override
+    public void likeTweet(Integer id, CredentialsDto credentialsDto) {
+        Tweet tweetToLike = tweetRepository.tryToFindById(id);
+        User user = credentialsService.checkAuthorization(credentialsDto);
+
+        Set<Tweet> likedTweets = user.getLikedTweets();
+        likedTweets.add(tweetToLike);
+
+        user.setLikedTweets(likedTweets);
+        userRepository.saveAndFlush(user);
     }
 
     @Override
