@@ -22,6 +22,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+
+    @Override
+    public User getUser(String username) {
+        Optional<User> optionalUser = userRepository.findByCredentials_Username(username);
+        if(optionalUser.isEmpty()) {
+            throw  new NotFoundException("No User found with username " + username);
+        }
+        return optionalUser.get();
+    }
+
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         User userToCreate = userMapper.requestDtoToEntity(userRequestDto);
@@ -48,4 +58,10 @@ public class UserServiceImpl implements UserService {
     public List<UserResponseDto> getAllUsers() {
         return userMapper.entitiesToResponseDtos(userRepository.findAllByDeletedFalse());
     }
+
+    @Override
+    public UserResponseDto getUserByUsername(String username) {
+        return userMapper.entityToResponseDto(getUser(username));
+    }
+
 }

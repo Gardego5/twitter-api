@@ -27,4 +27,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/{username}")
+    public UserResponseDto getUserByUsername(@PathVariable String username) {
+        return userService.getUserByUsername(username);
+    }
+
 }
