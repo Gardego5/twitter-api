@@ -1,5 +1,6 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,14 +12,20 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFou
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    User findByDeletedFalse();
+
     Optional<User> findByCredentials_Username(String username);
 
+    Optional<User> findByCredentials_UsernameAndDeletedFalse(String username);
+
     default public User tryToFindByUsername(String username) throws NotFoundException {
-        Optional<User> optionalTweet = findByCredentials_Username(username);
+        Optional<User> optionalTweet = findByCredentials_UsernameAndDeletedFalse(username);
 
         if (optionalTweet.isEmpty())
             throw new NotFoundException("No User found with username " + username);
         else
             return optionalTweet.get();
     }
+
+    List<User> findAllByDeletedFalse();
 }

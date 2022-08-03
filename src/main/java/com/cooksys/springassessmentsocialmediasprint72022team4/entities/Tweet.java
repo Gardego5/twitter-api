@@ -15,13 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Where;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Where(clause = "deleted = false")
 @NoArgsConstructor
 @Data
 public class Tweet {
