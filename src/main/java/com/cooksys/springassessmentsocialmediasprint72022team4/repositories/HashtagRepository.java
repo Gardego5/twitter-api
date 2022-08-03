@@ -11,10 +11,10 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFou
 @Repository
 public interface HashtagRepository extends JpaRepository<Hashtag, Integer> {
 
-    Optional<Hashtag> findByLabel(String label);
+    Optional<Hashtag> findByLabelAndDeletedFalse(String label);
 
     default Hashtag tryToFindByLabel(String label) throws NotFoundException {
-        Optional<Hashtag> optionalTweet = findByLabel(label);
+        Optional<Hashtag> optionalTweet = findByLabelAndDeletedFalse(label);
 
         if (optionalTweet.isEmpty())
             throw new NotFoundException("No hashtag with label " + label);
