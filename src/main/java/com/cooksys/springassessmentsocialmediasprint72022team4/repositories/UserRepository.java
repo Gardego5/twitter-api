@@ -1,5 +1,6 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,4 +26,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         else
             return optionalTweet.get();
     }
+
+    List<User> findAllByDeletedFalse();
 }

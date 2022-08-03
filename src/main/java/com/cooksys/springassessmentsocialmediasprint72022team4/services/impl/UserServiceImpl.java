@@ -12,6 +12,7 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.services.UserServ
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,5 +42,10 @@ public class UserServiceImpl implements UserService {
             throw new NotAuthorizedException("User credentials do not match");
 
 
+    }
+
+    @Override
+    public List<UserResponseDto> getAllUsers() {
+        return userMapper.entitiesToResponseDtos(userRepository.findAllByDeletedFalse());
     }
 }
