@@ -1,6 +1,7 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.services.impl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,9 +14,11 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.BadRequestException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFoundException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.TweetMapper;
+import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.UserMapper;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetRequestDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetResponseDto;
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.repositories.HashtagRepository;
 import com.cooksys.springassessmentsocialmediasprint72022team4.repositories.TweetRepository;
 import com.cooksys.springassessmentsocialmediasprint72022team4.repositories.UserRepository;
@@ -31,6 +34,7 @@ public class TweetServiceImpl implements TweetService {
     private final TweetRepository tweetRepository;
     private final TweetMapper tweetMapper;
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     private final HashtagRepository hashtagRepository;
     private final CredentialsService credentialsService;
 
@@ -126,6 +130,12 @@ public class TweetServiceImpl implements TweetService {
     public TweetResponseDto getTweetById(Integer id) {
         return tweetMapper.entityToResponseDto(
             tweetRepository.tryToFindById(id));
+    }
+
+    @Override
+    public List<UserResponseDto> getTweetMentions(Integer id) {
+        Tweet tweet = tweetRepository.tryToFindById(id);
+        return userMapper.entitiesToResponseDtos(tweet.getMentions());
     }
 
     @Override
