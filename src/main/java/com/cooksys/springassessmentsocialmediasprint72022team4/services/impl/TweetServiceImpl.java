@@ -185,6 +185,12 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    public List<UserResponseDto> getTweetLikers(Integer id) {
+        Tweet tweet = tweetRepository.tryToFindById(id);
+        return userMapper.entitiesToResponseDtos(tweet.getLikers());
+    }
+
+    @Override
     public TweetResponseDto deleteTweetById(Integer id, CredentialsDto credentialsDto) {
         Tweet tweetToDelete = tweetRepository.tryToFindById(id);
         credentialsService.checkAuthorization(credentialsDto, tweetToDelete);

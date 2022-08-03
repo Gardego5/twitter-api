@@ -28,5 +28,7 @@ public interface TweetService {
 
     List<HashtagDto> getTweetTags(Integer id);
 
+    List<UserResponseDto> getTweetLikers(Integer id);
+
     TweetResponseDto deleteTweetById(Integer id, CredentialsDto credentialsDto);
 }
