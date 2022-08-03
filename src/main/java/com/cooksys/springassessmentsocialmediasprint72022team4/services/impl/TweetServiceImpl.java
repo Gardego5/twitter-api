@@ -13,9 +13,11 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Tweet;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.BadRequestException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFoundException;
+import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.HashtagMapper;
 import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.TweetMapper;
 import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.UserMapper;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.HashtagDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetRequestDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserResponseDto;
@@ -36,6 +38,7 @@ public class TweetServiceImpl implements TweetService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final HashtagRepository hashtagRepository;
+    private final HashtagMapper hashtagMapper;
     private final CredentialsService credentialsService;
 
     private Set<User> findMentions(String content) {
@@ -64,7 +67,6 @@ public class TweetServiceImpl implements TweetService {
         String label = "";
 
         while (m.find()) {
-            // Drop the # symbol from beginning of hashtag match.
             label = m.group();
 
             try {
@@ -174,6 +176,12 @@ public class TweetServiceImpl implements TweetService {
         Tweet tweet = tweetRepository.tryToFindById(id);
         return tweetMapper.entitiesToResponseDtos(
             tweetRepository.findAllByDeletedFalseAndInReplyTo(tweet));
+    }
+
+    @Override
+    public List<HashtagDto> getTweetTags(Integer id) {
+        Tweet tweet = tweetRepository.tryToFindById(id);
+        return hashtagMapper.entitiesToDtos(tweet.getHashtags());
     }
 
     @Override
