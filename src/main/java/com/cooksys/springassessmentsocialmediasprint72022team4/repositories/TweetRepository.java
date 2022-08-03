@@ -11,8 +11,10 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFou
 @Repository
 public interface TweetRepository extends JpaRepository<Tweet, Integer> {
 
+    Optional<Tweet> findByIdAndDeletedFalse(Integer id);
+
     default Tweet tryToFindById(Integer id) throws NotFoundException {
-        Optional<Tweet> optionalTweet = findById(id);
+        Optional<Tweet> optionalTweet = findByIdAndDeletedFalse(id);
 
         if (optionalTweet.isEmpty())
             throw new NotFoundException("No Tweet found with id " + id);
