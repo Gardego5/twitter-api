@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
-// import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Hashtag;
@@ -18,7 +18,7 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.repositories.User
 
 import lombok.RequiredArgsConstructor;
 
-// @Component
+@Component
 @RequiredArgsConstructor
 public class Seeder implements CommandLineRunner {
 

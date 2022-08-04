@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Tweet;
@@ -19,6 +21,9 @@ public interface TweetRepository extends JpaRepository<Tweet, Integer> {
     List<Tweet> findAllByDeletedFalseAndRepostOf(Tweet tweet);
 
     List<Tweet> findAllByDeletedFalseAndInReplyTo(Tweet tweet);
+
+    @Query("SELECT t FROM Tweet t INNER JOIN t.hashtags h WHERE h.id = :hashtag_id")
+    List<Tweet> getByHashtags(@Param("hashtag_id") Integer hashtag_id, Sort sort);
 
     Optional<Tweet> findByIdAndDeletedFalse(Integer id);
 
