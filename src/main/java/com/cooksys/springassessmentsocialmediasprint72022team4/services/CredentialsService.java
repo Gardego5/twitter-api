@@ -33,5 +33,7 @@ public interface CredentialsService {
      * @return {@code User} The user whose credentials match the ones provided
      */
     User checkAuthorization(CredentialsDto credentialsDto);
+
+    User checkAuthorization(CredentialsDto credentialsDto, String username);
     
 }
