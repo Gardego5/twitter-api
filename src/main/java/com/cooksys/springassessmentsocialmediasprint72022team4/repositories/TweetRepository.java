@@ -1,5 +1,6 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,10 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFou
 
 @Repository
 public interface TweetRepository extends JpaRepository<Tweet, Integer> {
+
+    List<Tweet> findAllByDeletedFalseAndRepostOf(Tweet tweet);
+
+    List<Tweet> findAllByDeletedFalseAndInReplyTo(Tweet tweet);
 
     Optional<Tweet> findByIdAndDeletedFalse(Integer id);
 

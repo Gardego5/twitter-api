@@ -25,5 +25,13 @@ public interface CredentialsService {
      * @return {@code User} The user that matched the credentials in the dto.
      */
     User checkAuthorization(CredentialsDto credentialsDto, Tweet tweetToDelete);
+
+    /**
+     * Verifies that the credentials in the dto correspond with a user
+     * and returns the user.
+     * @param credentialsDto
+     * @return {@code User} The user whose credentials match the ones provided
+     */
+    User checkAuthorization(CredentialsDto credentialsDto);
     
 }
