@@ -1,5 +1,6 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.repositories;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,4 +30,6 @@ public interface TweetRepository extends JpaRepository<Tweet, Integer> {
         else
             return optionalTweet.get();
     }
+
+    Collection<Tweet> findAllByInReplyTo(Tweet tweet);
 }

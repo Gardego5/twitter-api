@@ -2,6 +2,7 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.services;
 
 import java.util.List;
 
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.ContextDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.HashtagDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetRequestDto;
@@ -33,4 +34,6 @@ public interface TweetService {
     List<UserResponseDto> getTweetLikers(Integer id);
 
     TweetResponseDto deleteTweetById(Integer id, CredentialsDto credentialsDto);
+
+    ContextDto getTweetContext(Integer id);
 }

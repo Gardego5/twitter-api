@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.ContextDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.HashtagDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetRequestDto;
@@ -85,6 +86,11 @@ public class TweetController {
     @GetMapping("/{id}/likes")
     public List<UserResponseDto> getTweetLikers(@PathVariable Integer id) {
         return tweetService.getTweetLikers(id);
+    }
+
+    @GetMapping("/{id}/context") 
+    public ContextDto getTweetContext(@PathVariable Integer id) {
+        return tweetService.getTweetContext(id);
     }
 
     @DeleteMapping("/{id}")
