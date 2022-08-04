@@ -69,4 +69,9 @@ public class UserServiceImpl implements UserService {
         return !userRepository.findByCredentials_UsernameAndDeletedFalse(username).isEmpty();
     }
 
+    @Override
+    public Boolean usernameAvailable(String username) {
+        return userRepository.findByCredentials_Username(username).isEmpty();
+    }
+
 }
