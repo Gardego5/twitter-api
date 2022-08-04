@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Hashtag;
@@ -150,6 +151,12 @@ public class TweetServiceImpl implements TweetService {
 
         return tweetMapper.entityToResponseDto(
             tweetRepository.saveAndFlush(tweetToRepost));
+    }
+
+    @Override
+    public List<TweetResponseDto> getTweets() {
+        return tweetMapper.entitiesToResponseDtos(
+            tweetRepository.findAllByDeletedFalse(Sort.by(Sort.Direction.DESC, "posted")));
     }
 
     @Override

@@ -18,6 +18,8 @@ public interface TweetService {
 
     TweetResponseDto repostTweet(Integer id, CredentialsDto credentialsDto);
 
+    List<TweetResponseDto> getTweets();
+
     TweetResponseDto getTweetById(Integer id);
 
     List<UserResponseDto> getTweetMentions(Integer id);
