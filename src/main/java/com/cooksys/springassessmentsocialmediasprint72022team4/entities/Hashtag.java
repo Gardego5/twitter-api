@@ -1,8 +1,8 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.entities;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -23,7 +24,7 @@ public class Hashtag {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private boolean deleted;
 
@@ -39,6 +40,7 @@ public class Hashtag {
     private Timestamp lastUsed;
 
     @ManyToMany(mappedBy = "hashtags")
-    private List<Tweet> tweets = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    private Set<Tweet> tweets = new HashSet<>();
 
 }

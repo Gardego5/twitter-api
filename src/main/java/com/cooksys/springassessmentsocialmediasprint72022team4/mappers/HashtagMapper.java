@@ -1,6 +1,7 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.mappers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.mapstruct.Mapper;
 
@@ -14,5 +15,5 @@ public interface HashtagMapper {
 
     HashtagDto entityToDto(Hashtag hashtag);
 
-    List<HashtagDto> entitiesToDtos( List<Hashtag> hashtags);
+    List<HashtagDto> entitiesToDtos( Set<Hashtag> hashtags);
 }

@@ -1,7 +1,10 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.repositories;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +13,12 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFou
 
 @Repository
 public interface TweetRepository extends JpaRepository<Tweet, Integer> {
+
+    List<Tweet> findAllByDeletedFalse(Sort sort);
+
+    List<Tweet> findAllByDeletedFalseAndRepostOf(Tweet tweet);
+
+    List<Tweet> findAllByDeletedFalseAndInReplyTo(Tweet tweet);
 
     Optional<Tweet> findByIdAndDeletedFalse(Integer id);
 
@@ -21,4 +30,6 @@ public interface TweetRepository extends JpaRepository<Tweet, Integer> {
         else
             return optionalTweet.get();
     }
+
+    Collection<Tweet> findAllByInReplyTo(Tweet tweet);
 }

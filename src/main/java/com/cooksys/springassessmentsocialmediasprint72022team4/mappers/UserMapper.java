@@ -1,6 +1,7 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.mappers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,5 +20,8 @@ public interface UserMapper {
 
     @Mapping(target = "username", source = "credentials.username")
     List<UserResponseDto> entitiesToResponseDtos(List<User> users);
+
+    @Mapping(target = "username", source = "credentials.username")
+    List<UserResponseDto> entitiesToResponseDtos(Set<User> users);
 
 }
