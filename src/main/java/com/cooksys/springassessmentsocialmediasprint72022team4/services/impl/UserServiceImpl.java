@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.entityToResponseDto(getUser(username));
     }
 
+    @Override
+    public Boolean usernameExists(String username) {
+        return !userRepository.findByCredentials_UsernameAndDeletedFalse(username).isEmpty();
+    }
+
 }

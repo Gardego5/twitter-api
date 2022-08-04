@@ -14,4 +14,6 @@ public interface UserService {
     UserResponseDto getUserByUsername(String username);
 
     User getUser(String username);
+
+    Boolean usernameExists(String username);
 }
