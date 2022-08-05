@@ -24,6 +24,11 @@ public class UserController {
         return userService.createUser(userRequestDto);
     }
 
+    @PatchMapping("/@{username}")
+    public UserResponseDto updateProfile(@PathVariable String username, @RequestBody UserRequestDto userRequestDto) {
+        return userService.updateProfile(username, userRequestDto);
+    }
+
     @GetMapping
     public List<UserResponseDto> getAllUsers() {
         return userService.getAllUsers();

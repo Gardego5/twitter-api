@@ -66,6 +66,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserResponseDto updateProfile(String username, UserRequestDto userRequestDto) {
+        User sentUserData = userMapper.requestDtoToEntity(userRequestDto);
+        User userToUpdate = credentialsService.checkAuthorization(userRequestDto.getCredentials());
+
+        userToUpdate.getCredentials().setUsername(username);
+        if (sentUserData.getProfile() == null)
+            throw new BadRequestException("You must send a profile.");
+        if (sentUserData.getProfile().getEmail() == null && (sentUserData.getProfile().getFirstName() != null ||sentUserData.getProfile().getLastName() != null ||sentUserData.getProfile().getPhone() != null))
+            throw new BadRequestException("Profile requires an email.");
+        else if (sentUserData.getProfile().getEmail() != null)
+            userToUpdate.setProfile(sentUserData.getProfile());
+
+        return userMapper.entityToResponseDto(userRepository.saveAndFlush(userToUpdate));
+    }
+
+    @Override
     public List<UserResponseDto> getAllUsers() {
         return userMapper.entitiesToResponseDtos(userRepository.findAllByDeletedFalse());
     }
