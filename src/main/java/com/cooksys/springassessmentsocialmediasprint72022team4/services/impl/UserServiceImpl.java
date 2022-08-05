@@ -3,6 +3,7 @@ package com.cooksys.springassessmentsocialmediasprint72022team4.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
 import org.springframework.stereotype.Service;
@@ -111,6 +112,19 @@ public class UserServiceImpl implements UserService {
         }
         userFollowing.getFollowing().remove(userToFollow);
         userMapper.entityToResponseDto(userRepository.saveAndFlush(userFollowing));
+    }
+
+    @Override
+    public List<UserResponseDto> getFollowers(String username) {
+        User user = getUser(username);
+        Set<User> followersNotDeleted = user.getFollowers();
+        return userMapper.entitiesToResponseDtos(userRepository.saveAllAndFlush(followersNotDeleted));
+    }
+
+    @Override
+    public List<TweetResponseDto> getUserMentions(String username) {
+        Integer user_id = userRepository.tryToFindByUsername("@" + username).getId();
+        return tweetMapper.entitiesToResponseDtos(tweetRepository.getByUserMention(user_id));
     }
 
     @Override

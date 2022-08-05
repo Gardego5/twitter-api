@@ -1,5 +1,6 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.controllers;
 
+import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserRequestDto;
@@ -53,5 +54,15 @@ public class UserController {
     @PostMapping("/{username}/unfollow")
     public void unfollowUser(@PathVariable String username, @RequestBody CredentialsDto credentialsDto) {
         userService.unfollowUser(username, credentialsDto);
+    }
+
+    @GetMapping("/{username}/followers")
+    public List<UserResponseDto> getFollowers(@PathVariable String username) {
+        return userService.getFollowers(username);
+    }
+
+    @GetMapping("/{username}/mentions")
+    public List<TweetResponseDto> getUserMentions(@PathVariable String username) {
+        return userService.getUserMentions(username);
     }
 }
