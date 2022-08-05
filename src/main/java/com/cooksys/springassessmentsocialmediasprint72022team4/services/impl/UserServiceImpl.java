@@ -103,6 +103,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void unfollowUser(String username, CredentialsDto credentialsDto) {
+        User userToFollow = getUser(username);
+        User userFollowing = credentialsService.checkAuthorization(credentialsDto);
+        if (!userFollowing.getFollowing().contains(userToFollow)) {
+            throw new BadRequestException("You are NOT following this user.");
+        }
+        userFollowing.getFollowing().remove(userToFollow);
+        userMapper.entityToResponseDto(userRepository.saveAndFlush(userFollowing));
+    }
+
+    @Override
     public Boolean usernameExists(String username) {
         return !userRepository.findByCredentials_UsernameAndDeletedFalse(username).isEmpty();
     }
