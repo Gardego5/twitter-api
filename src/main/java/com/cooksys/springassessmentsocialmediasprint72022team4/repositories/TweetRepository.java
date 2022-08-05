@@ -26,6 +26,9 @@ public interface TweetRepository extends JpaRepository<Tweet, Integer> {
     @Query("SELECT t FROM Tweet t INNER JOIN t.hashtags h WHERE h.id = :hashtag_id")
     List<Tweet> getByHashtags(@Param("hashtag_id") Integer hashtag_id, Sort sort);
 
+    @Query("SELECT t FROM Tweet t INNER JOIN t.mentions m WHERE m.id = :user_id")
+    List<Tweet> getByUserMention(@Param("user_id") Integer user_id);
+
     List<Tweet> findAllByDeletedFalseAndAuthor(User author);
 
     Optional<Tweet> findByIdAndDeletedFalse(Integer id);
