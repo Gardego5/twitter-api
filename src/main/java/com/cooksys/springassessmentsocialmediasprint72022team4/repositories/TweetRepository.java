@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Tweet;
+import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFoundException;
 
 @Repository
@@ -24,6 +25,8 @@ public interface TweetRepository extends JpaRepository<Tweet, Integer> {
 
     @Query("SELECT t FROM Tweet t INNER JOIN t.hashtags h WHERE h.id = :hashtag_id")
     List<Tweet> getByHashtags(@Param("hashtag_id") Integer hashtag_id, Sort sort);
+
+    List<Tweet> findAllByDeletedFalseAndAuthor(User author);
 
     Optional<Tweet> findByIdAndDeletedFalse(Integer id);
 

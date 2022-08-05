@@ -1,6 +1,7 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.controllers;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.TweetResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserRequestDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.services.UserService;
@@ -28,9 +29,14 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/@{username}")
     public UserResponseDto getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
+    }
+
+    @GetMapping("/@{username}/feed")
+    public List<TweetResponseDto> getUserFeed(@PathVariable String username) {
+        return userService.getUserFeed(username);
     }
 
     @DeleteMapping("/@{username}")
