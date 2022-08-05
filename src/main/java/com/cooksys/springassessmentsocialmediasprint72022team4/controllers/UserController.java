@@ -1,5 +1,6 @@
 package com.cooksys.springassessmentsocialmediasprint72022team4.controllers;
 
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserRequestDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.services.UserService;
@@ -32,4 +33,8 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
+    @DeleteMapping("/@{username}")
+    public UserResponseDto deleteUser(@PathVariable String username, @RequestBody CredentialsDto credentialsDto) {
+        return userService.deleteUser(username, credentialsDto);
+    }
 }

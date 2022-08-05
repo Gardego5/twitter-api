@@ -5,9 +5,11 @@ import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.BadReq
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotAuthorizedException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotFoundException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.UserMapper;
+import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserRequestDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.UserResponseDto;
 import com.cooksys.springassessmentsocialmediasprint72022team4.repositories.UserRepository;
+import com.cooksys.springassessmentsocialmediasprint72022team4.services.CredentialsService;
 import com.cooksys.springassessmentsocialmediasprint72022team4.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-
+    private final CredentialsService credentialsService;
 
     @Override
     public User getUser(String username) {
@@ -72,6 +74,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean usernameAvailable(String username) {
         return userRepository.findByCredentials_Username(username).isEmpty();
+    }
+
+    @Override
+    public UserResponseDto deleteUser(String username, CredentialsDto credentialsDto) {
+        User user = credentialsService.checkAuthorization(credentialsDto, username);
+        user.setDeleted(true);
+        user.getTweets().forEach(tweet -> tweet.setDeleted(true));
+
+        return userMapper.entityToResponseDto(userRepository.saveAndFlush(user));
     }
 
 }

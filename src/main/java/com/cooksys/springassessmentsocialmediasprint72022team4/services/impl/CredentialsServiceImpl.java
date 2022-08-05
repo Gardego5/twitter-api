@@ -48,4 +48,14 @@ public class CredentialsServiceImpl implements CredentialsService {
         else
             throw new NotAuthorizedException("Wrong User");
     }
+
+    @Override
+    public User checkAuthorization(CredentialsDto credentialsDto, String username) {
+        User user = checkAuthorization(credentialsDto);
+
+        if (user.getCredentials().getUsername().equals(username))
+            return user;
+        else
+            throw new NotAuthorizedException("Username mismatch.");
+    }
 }
