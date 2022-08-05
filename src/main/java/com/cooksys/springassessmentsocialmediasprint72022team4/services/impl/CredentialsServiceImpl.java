@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Tweet;
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.User;
+import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.BadRequestException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.exceptions.NotAuthorizedException;
 import com.cooksys.springassessmentsocialmediasprint72022team4.mappers.CredentialsMapper;
 import com.cooksys.springassessmentsocialmediasprint72022team4.model.CredentialsDto;
@@ -22,6 +23,8 @@ public class CredentialsServiceImpl implements CredentialsService {
     private final UserRepository userRepository;
 
     private User checkAuthorization(Credentials credentials) {
+        if (credentials == null)
+            throw new BadRequestException("No Credentials Provided.");
         User user = userRepository.tryToFindByUsername(credentials.getUsername());
         if (user.getCredentials().equals(credentials))
             return user;
