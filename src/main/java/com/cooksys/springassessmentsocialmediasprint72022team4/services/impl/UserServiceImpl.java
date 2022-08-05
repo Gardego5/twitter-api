@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Credentials;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.springassessmentsocialmediasprint72022team4.entities.Tweet;
@@ -104,6 +105,17 @@ public class UserServiceImpl implements UserService {
         feed.sort((t1, t2) -> Long.valueOf(t2.getPosted().getTime()).compareTo(t1.getPosted().getTime()));
 
         return tweetMapper.entitiesToResponseDtos(feed);
+    }
+
+    @Override
+    public void followUser(String username, CredentialsDto credentialsDto) {
+        User userToFollow = getUser(username);
+        User userFollowing = credentialsService.checkAuthorization(credentialsDto);
+        if (userFollowing.getFollowing().contains(userToFollow)) {
+            throw new BadRequestException("You are following this user already!");
+        }
+        userFollowing.getFollowing().add(userToFollow);
+        userMapper.entityToResponseDto(userRepository.saveAndFlush(userFollowing));
     }
 
     @Override

@@ -48,4 +48,10 @@ public class UserController {
     public UserResponseDto deleteUser(@PathVariable String username, @RequestBody CredentialsDto credentialsDto) {
         return userService.deleteUser(username, credentialsDto);
     }
+
+    @PostMapping("/{username}/follow")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void followUser(@PathVariable String username, @RequestBody CredentialsDto credentialsDto) {
+        userService.followUser(username, credentialsDto);
+    }
 }
